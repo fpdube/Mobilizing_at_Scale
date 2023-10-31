@@ -1,0 +1,352 @@
+---
+title: "Mobilizing Development and Climate Finance at Scale"
+author: "François-Philippe Dubé"
+date: "2023-10-30"
+output:
+  quarto::quarto_presentation:
+    transition: slide
+#format: pptx
+format:
+ revealjs:
+   width: 1600
+   height: 900
+   theme: default
+editor: visual
+---
+
+```{r}
+require(ProjectTemplate)
+if(basename(getwd()) == "src") setwd("..")
+load.project()
+```
+
+# The Dual Challenge {background-image="images/borneo.png" background-opacity="0.7"}
+
+::: notes
+Objective:
+
+-   Present an overview of the problem of financing development and climate action...
+
+-   ... how innovative finance helps mobilize additional funds for these objectives, and
+
+-   some of its limitations.
+
+Two disclaimers:
+
+-   I speak in my own name.
+
+-   I am a practitioner.
+:::
+
+## Since 1990, the face of poverty has radically changed
+
+```{r}
+#| label: fig-poverty
+#| fig-cap: "Poverty Headcount in the Developing World."
+#| cap-location: top
+
+#| fig-alt: "The number of people living under $2.15/day has decreased since 1995. The poor are now majoritarily urban, living under $6.85/day."
+#| fig-subcap:
+#| - "In 2017 US PPP dollars per day"
+#| fig-width: 10
+#| fig-height: 5
+
+require(ProjectTemplate)
+if(basename(getwd()) == "src") setwd("..")
+load.project()
+
+ggplot(Pov, aes(x = year)) +
+  
+  # Ajout des zones avec geom_area
+  geom_area(aes(y = pov6.85, fill = "pov6.85")) +
+  geom_area(aes(y = pov3.65, fill = "pov3.65")) +
+  geom_area(aes(y = pov2.15, fill = "pov2.15")) +
+  
+  
+  # Personnalisation des couleurs
+  scale_fill_manual(values = c(as.character(wes_palette("Zissou1", 3, type = c("discrete")))),
+                    name = NULL,
+                    labels = c("pov6.85" = "$6.85/day", "pov3.65" = "$3.65/day", "pov2.15" = "$2.15/day")) +
+  
+  # Configuration de la légende
+  theme_minimal() +
+    theme(legend.position = "top") +
+
+  # Ajout du titre -- maintenant mis dans la "caption"
+  #ggtitle("Poverty Headcount in the Developing World") +
+  
+  # Ajout de la source
+  labs(caption = "Source: WB series SI.POV.DDAY, SI.POV.LMIC, SI.POV.UMIC, SP.POP.TOTL") +
+  
+  # Formatage de l'axe y en milliards
+  scale_y_continuous(name = NULL, labels = scales::number_format(scale = 1e-9, suffix = "B")) +
+  scale_x_continuous(name = NULL) +
+  theme(text=element_text(size=20))
+
+```
+
+## Financing the SDGs requires finding new sources of finance
+
+::: columns
+::: {.column width="70%"}
+-   SDGs provide the roadmap to ending poverty
+
+-   Require \$5.6---6.4 trillion *per year* to 2030
+
+-   AAAA provides to roadmap to financing the SDGs, from all sources
+
+-   Hence, the **Financing for Development** agenda proposes to go ***from billions to trillions***
+
+    -   ODA: \~\$200 ***billion*** (2022)
+
+    -   Global gross private sector financial assets: \~\$300 ***trillion***
+
+-   While private finance mobilization holds promises, **it works mostly for revenue-generating activites**
+:::
+
+::: {.column width="30%"}
+![](images/sdgs_poster_new1.png)
+:::
+:::
+
+::: notes
+-   In 2000, the world adopted Millenium Development Goals for 2015.
+
+    -   Only 8, with 21 targets: made it easier to focus.
+    -   Limited to developing countries.
+
+-   In 2016, The 2030 Agenda for Sustainable Development was adopted.
+
+    -   17 SDGs: Gender equality, no one left behind, tackling climate crisis, partnerships
+
+    -   169 targets, applicable to all countries.
+
+-   As of 2023, only \~15% of SDG targets are on track.
+
+-   AAAA is the roadmap to financing the SDGs. Financing from **all sources**.
+
+    -   Domestic resources mobilization (taxes)
+    -   Domestic and international private capital
+    -   International development cooperation
+    -   Debt
+    -   Trade as an engine for development
+    -   Science and technology capacity building
+
+-   MDBs and other DFIs have a key role in aligning private finance incentives to SDGs
+
+-   **However: Financial markets can only fund activities generating returns**
+
+-   Debt crisis: 3.3 bn people live in countries spending more on debt servicing than on education and health
+
+-   Regarding the sovereign debt: important to note that only about 20% of developing countries' public debt is with OECD countries (Paris Club). Private creditors and Chinese export banks own the balance.
+:::
+
+## Climate change threatens to derail development efforts
+
+-   Limiting global average temperature to 1.5°C requires a **45% reduction in CO~2~ emissions by 2030** (IPCC 2023). [**(off track)**]{.smallcaps}.
+
+-   At US\$803 billion (2020), **global climate finance flows represent only 35% of overall needs** of developing countries.
+
+-   Developed countries have also **committed to raising \$US 100 B a year** in climate finance for developing countries by 2020. **([off track]{.smallcaps})**.
+
+-   Objective is to create opportunities to **unlock trillions of dollars** and shift investment to climate action *at scale*.
+
+::: notes
+-   The **Paris Agreement is a legally binding** international **treaty** on climate change. It was adopted by 196 Parties at COP21 in 2015 in Paris.
+
+-   Its overarching goal is to hold "the increase in the global average temperature to well below 2°C above pre-industrial levels" and pursue efforts "to limit the temperature increase to 1.5°C above pre-industrial levels."
+
+-   To achieve this, GHG emissions must peak before 2025 at the latest and decline 43% by 2030.
+
+-   This is off-track.
+
+-   Last year at COP27, the decision made was to request the parties to the treaty to increase their 2030 targets to align with the goal.
+
+-   For example, Canada's new target is to reduce GHG emissions by 40-45% below 2005 by 2030. (Previous target: 30%)
+
+-   CC **Mitigation** is mostly funded with ***loans*** / **Adaptation** with ***grants***.
+
+-   At US\$803 billion (2020), global climate finance flows are only 35% of overall needs of developing countries. Small given that:
+
+    -   Mitigating GHG emissions = investment opportunities
+
+    -   Adapting to climate change = reducing long-term costs
+:::
+
+## Multilateral funds are at the centre of OECD countries' climate finance objectives
+
+![](images/OECD%20(2022)%20Climate%20finance%20provided%20and%20mobilised%20in%202013-2020%20(USD%20billion).png){fig-align="center" width="1264"}
+
+::: notes
+-   In 2020, **OECD countries mobilized 83 Bn in climate finance** ⇒ Mix of bilateral public funds (31 B), multilateral funds (31 B), mobilized private capital (13 B).
+
+-   43% of climate finance flows to developing countries are provided through multilateral funds.
+
+-   A substantial part of climate finance is delivered as loans, principally for GHG mitigation, including:
+
+    -   Renewable energy generation
+
+    -   Energy efficiency
+
+    -   Electric transportation
+
+-   Because t**hese are fundamentally market activities,** it opens the possibility to mobilize finance from private markets.
+
+    -   In 2020, this provided 15% of total climate finance flows.
+
+-   Conversely, most adaptation finance is provided as grants, because the are often associated with public goods investments---often to manage water. For example:
+
+    -   Watershed management (floods, droughts)
+
+    -   Irrigation
+
+    -   Research on drought-resistant crops
+
+    -   Sea walls
+:::
+
+# Innovative Finance {background-image="images/borneo.png" background-opacity="0.7"}
+
+## Most of the population now lives in Middle Income Countries
+
+![](images/WDI_pop_in_countries_by_income_group.png){fig-align="center"}
+
+::: notes
+This is critical. It means that we can considerably diversify the sources of finance:
+
+-   Developing country governments' own resources, present and future ⇒ It might be possible to increase their access to cheap finance for adaptation or poverty reduction and growth
+
+    -   Example of the International Facility for Financing Education later
+
+-   Internal private markets, including institutional investors ⇒ Blended finance
+
+-   National private markets ⇒ Blended finance
+:::
+
+## What is innovative finance?
+
+> "Financial structures and mechanisms that **mobilize, govern or distribute** funds beyond traditional donor-country ODA."
+
+(Canada, [*A Canadian Approach to Innovative Financing for Sustainable Development*](https://www.international.gc.ca/world-monde/issues_development-enjeux_developpement/priorities-priorites/fiap_fsd-paif_fdd.aspx?lang=eng)).
+
+------------------------------------------------------------------------
+
+| Financial                              | Non-Financial               |
+|----------------------------------------|-----------------------------|
+| Concessional Loans                     | Technical Assistance        |
+| Guarantees                             | Challenge Prizes            |
+| Equity                                 | Advanced Market Commitments |
+| Results-Based Financing                |                             |
+| Impact Bonds (e.g. Blue / Greed Bonds) |                             |
+
+## Blended finance is one approach to innovative finance
+
+> Blended finance is a **structuring approach** that allows **organizations with different objectives** to invest alongside each other while achieving their own objectives (whether financial return, social impact, or a blend of both).
+>
+> The main investment barriers for private investors addressed by blended finance are **(1) high perceived and real risk** and **(2) poor returns for the risk** relative to comparable investments.
+
+Source: Convergence (2023), [*Blended Finance*](https://www.convergence.finance/blended-finance)
+
+::: notes
+Blended finance transactions should have three signature characteristics:
+
+-   The transaction **contributes towards achieving the SDGs**. However, not every participant needs to have that development objective. Private investors in a blended finance structure may simply be seeking a market-rate financial return.
+
+-   Overall, **the transaction expects to yield a positive financial return**. Different investors in a blended finance structure will have different return expectations, ranging from concessional to market-rate.
+
+-   **The public and/or philanthropic parties are catalytic.** The participation from these parties improves the risk/return profile of the transaction in order to attract participation from the private sector.
+:::
+
+## How to ensure that blended finance remains focused on development objectives?
+
+The OECD DAC has adopted **five principles** to guide the development of blended finance transactions.
+
+1.  Anchor blended finance use to a development rationale
+
+2.  Design blended finance to increase the mobilization of commercial finance
+
+3.  Tailor blended finance to local context
+
+4.  Focus on effective partnering for blended finance
+
+5.  Monitor blended finance for transparency and results
+
+::: notes
+1.  The use of public funds in BF transactions must seek to further SDGs.
+2.  **Additionality**: public funds are used only when commercial finance would not go on its own. / **Minimal concessionality:** subsidizing the private sector the least possible. / Aim for **commercial sustainability**.
+3.  Contribute to local financial markets development
+4.  Aim for scalability
+5.  Ensure that **resources** are devoted to **tracking development results**, **commercial performance, mobilization**.
+:::
+
+## A typical blended finance fund structure
+
+![](images/blended_finance.png){fig-align="center" width="1334"}
+
+::: notes
+-   Blended finance funds tend to invest over 10-25 years ⇒ Require **patient capital**.
+-   Equity in the fund provides this patience.
+-   Fund can be a debt fund or an equity fund: depends on what it provides to SMEs or MFIs, not how it is constituted.
+-   Junior shares typically:
+    -   receive far less returns
+    -   absorb all losses
+    -   is paid back at the end... if any remains.
+-   TAF provides know-how. Reduces risks for investors, by making SMEs more profitable.
+-   Example BlueOrchard's LAC Gender, Diversity, and Inclusion Fund.
+    -   Provides finance to MFIs seeking to further the financial inclusion of women, Indigenous, and Afro-Descendents in LAC region.
+    -   TAF helps MFIs develop financial products that take into account the financial realities of women
+    -   GAC provided \$50 m in blended finance, mostly in junior position.
+    -   Also \$5 m for the TAF.
+    -   IDB Invest, a DFI, purchased mezzanine shares
+:::
+
+## How to multiply each dollar by 25: the International Finance Facility for Education (IFFEd)
+
+![](images/diagramme_IFFEd.png){width="1334"}
+
+::: notes
+-   The premise of IFFEd is that LMICs can afford to borrow for education, but not at commercial rates.
+-   Under the traditional model, \$140 million in grant will provide \$140 million in goods and services to developing countries.
+-   Under the IFFEd model, the same amount (in guarantee and grants) will provide \$1 billion in concessional loans.
+-   IFFEd aims to unlock \$10 billion for education over 5 years.
+-   Cannot work with highly indebted countries or LICs.
+:::
+
+## Innovative finance suffers from limitations
+
+-   Innovative finance can multiply impact when the conditions are right, BUT:
+
+    -   reflows require credit-worthy borrowers---whether individuals, companies, or states;
+    -   effective when working with market mechanisms---less appropriate for public goods (e.g. education, climate change adaptation) and transfer payments (social safety net).
+
+-   It is complex to set up:
+
+    -   the balance between compensating risk and subsidization is difficult to assess
+
+    -   due diligence on financial structure is complex
+
+    -   multiple layers of financing → impact is difficult to monitor and attribute
+
+::: notes
+-   Difficult to implement in LICs due to market constraints:
+    -   Risk is too high for most investors
+    -   Returns are often too low when factoring in currency risk
+-   Climate change *mitigation* works well. Climate change *adaptation* is more complex to implement using a repayable instrument (loan, equity).
+-   (Note: Public goods can be funded by a sovereign or sub-sovereign entity using concessional loans or bonds sourced from private markets.)
+:::
+
+# In summary
+
+## Key messages
+
+-   The face of poverty is changing, but there remains 700 m people living in absolute poverty---or 4 billion when considering also urban poor in LMICs (\< US\$3.65/day) and UMICs (\< US\$ 6.65/day).
+
+-   Reaching the SDGs will be extremely expensive. This is compounded by the cost of adapting to climate change and of mitigating GHG emissions.
+
+-   Innovative finance is an important tool for financing development and climate action. It aims to put private markets in the service of development.
+
+-   However, it suffers from limitations: only works when returns are expected.
+
+-   It is complex to set up: each transaction is unique, and it is difficult to find the appropriate level of subsidization.
+
+-   Despite its appeal, it has not yet succeeded in bringing development finance to scale.
